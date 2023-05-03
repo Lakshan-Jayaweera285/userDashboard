@@ -47,8 +47,8 @@ const Dashboard = ()=> {
     dispatch(getAllCards()); 
   },[dispatch]);
 
-  console.log(data);
   const devicesData = data.cards.data1[0];
+  const user1BicycleData = data.cards.data2;
  
   
   return (
@@ -141,8 +141,8 @@ const Dashboard = ()=> {
                   <ChartistGraph
                     className="ct-chart"
                     data={{
-                      labels: devicesData.historyTimeInterval,
-                      series: [devicesData.waterLevelHistory.split(',')],
+                      labels: Array.from({length: Object.keys(user1BicycleData).length}, (_, i) => (i + 1)*5),
+                      series: [user1BicycleData.map((item)=>item.speed)],
                     }}
                     type="Line"
                     options={waterLevelChart.options}
