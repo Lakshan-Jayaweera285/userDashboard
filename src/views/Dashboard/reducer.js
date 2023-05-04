@@ -1,7 +1,7 @@
 import * as actionTypes from "./action";
 
 const initialState ={
-cards: {data1: [], data2: []},
+cards: {data: [], data1: [], data2: [], data3: [], data4: []},
     loading:false,
     addSuc:false
 };

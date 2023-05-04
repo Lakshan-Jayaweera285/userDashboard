@@ -29,6 +29,8 @@ import { Icon } from "semantic-ui-react";
 
 
 import {
+  speedChart,
+  heartRateChart,
   waterLevelChart,
   humidityChart,
   temparetureChart,
@@ -47,8 +49,12 @@ const Dashboard = ()=> {
     dispatch(getAllCards()); 
   },[dispatch]);
 
-  const devicesData = data.cards.data1[0];
-  const user1BicycleData = data.cards.data2;
+  const devicesData = data.cards.data[0];
+  const userOneBicycleData = data.cards.data1;
+  const userTwoBicycleData = data.cards.data2;
+  const userOneHeartData = data.cards.data3;
+  const userTwoHeartData = data.cards.data4;
+  console.log(userOneBicycleData[0]);
  
   
   return (
@@ -141,12 +147,12 @@ const Dashboard = ()=> {
                   <ChartistGraph
                     className="ct-chart"
                     data={{
-                      labels: Array.from({length: Object.keys(user1BicycleData).length}, (_, i) => (i + 1)*5),
-                      series: [user1BicycleData.map((item)=>item.speed)],
+                      labels: Array.from({length: Object.keys(userOneBicycleData).length}, (_, i) => (i + 1)*5),
+                      series: [userOneBicycleData.map((item)=>item.speed)],
                     }}
                     type="Line"
-                    options={waterLevelChart.options}
-                    listener={waterLevelChart.animation}
+                    options={speedChart.options}
+                    listener={speedChart.animation}
                   />
                 </CardHeader>
                 <CardBody>
@@ -171,12 +177,12 @@ const Dashboard = ()=> {
                   <ChartistGraph
                     className="ct-chart"
                     data={{
-                      labels: devicesData.historyTimeInterval,
-                      series: [devicesData.waterLevelHistory.split(',')],
+                      labels: Array.from({length: Object.keys(userOneHeartData).length}, (_, i) => (i + 1)*5),
+                      series: [userOneHeartData.map((item)=>item.bpm)],
                     }}
                     type="Line"
-                    options={waterLevelChart.options}
-                    listener={waterLevelChart.animation}
+                    options={heartRateChart.options}
+                    listener={heartRateChart.animation}
                   />
                 </CardHeader>
                 <CardBody>
@@ -201,12 +207,12 @@ const Dashboard = ()=> {
                   <ChartistGraph
                     className="ct-chart"
                     data={{
-                      labels: devicesData.historyTimeInterval,
-                      series: [devicesData.waterLevelHistory.split(',')],
+                      labels: Array.from({length: Object.keys(userTwoBicycleData).length}, (_, i) => (i + 1)*5),
+                      series: [userTwoBicycleData.map((item)=>item.speed)],
                     }}
                     type="Line"
-                    options={waterLevelChart.options}
-                    listener={waterLevelChart.animation}
+                    options={speedChart.options}
+                    listener={speedChart.animation}
                   />
                 </CardHeader>
                 <CardBody>
@@ -231,13 +237,13 @@ const Dashboard = ()=> {
                   <ChartistGraph
                     className="ct-chart"
                     data={{
-                      labels: devicesData.historyTimeInterval,
-                      series: [devicesData.humidityHistory.split(',')],
+                      labels: Array.from({length: Object.keys(userTwoHeartData).length}, (_, i) => (i + 1)*5),
+                      series: [userTwoHeartData.map((item)=>item.bpm)],
                     }}
                     type="Line"
-                    options={humidityChart.options}
-                    responsiveOptions={humidityChart.responsiveOptions}
-                    listener={humidityChart.animation}
+                    options={heartRateChart.options}
+                   // responsiveOptions={humidityChart.responsiveOptions}
+                    listener={heartRateChart.animation}
                   />
                 </CardHeader>
                 <CardBody>

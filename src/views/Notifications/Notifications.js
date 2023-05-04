@@ -41,8 +41,8 @@ const Notifications = ()=> {
   const limits = data.limits[0];
  // console.log(limits,"limits")
 
-  const [tempValue, setTempValue] = useState([20,30]);
-  const [humValue, setHumValue] = useState([50, 80]);
+  const [speedValue, setspeedValue] = useState([0,45]);
+  const [heartRateValue, setheartRateValue] = useState([50, 160]);
   const [waterValue, setWaterValue] = useState([50, 90]);
  
   
@@ -60,19 +60,19 @@ const Notifications = ()=> {
   }
   
 
-  const tempHandleChange = (event, newValue) => {
-    setTempValue(newValue);
+  const speedHandleChange = (event, newValue) => {
+    setspeedValue(newValue);
     const temp = {
-      temperatureLowerLimit : newValue[0],
-      temperatureUpperLimit : newValue[1]
+      speedLowerLimit : newValue[0],
+      speedUpperLimit : newValue[1]
     }
     dispatch(addNewLimits(temp))  
   };
-  const humHandleChange = (event, newValue) => {
-    setHumValue(newValue);
+  const heartRateHandleChange = (event, newValue) => {
+    setheartRateValue(newValue);
     const hum = {
-      humidityLowerLimit : newValue[0],
-      humidityUpperLimit : newValue[1]
+      heartRateLowerLimit : newValue[0],
+      heartRateUpperLimit : newValue[1]
     }
     dispatch(addNewLimits(hum))  
   };
@@ -84,8 +84,8 @@ const Notifications = ()=> {
     }
     dispatch(addNewLimits(water))  
   };
-  // console.log(tempValue,"temp");
-  // console.log(humValue,"hum");
+  // console.log(speedValue,"temp");
+  // console.log(heartRateValue,"hum");
   // console.log(waterValue,"water")
   
   return (
@@ -107,8 +107,8 @@ const Notifications = ()=> {
                   <h3 className={classes.cardTitle}>
                     Recommended Values
                     <Slider
-                      value={tempValue}
-                      onChange={tempHandleChange}
+                      value={speedValue}
+                      onChange={speedHandleChange}
                       valueLabelDisplay="auto"
                       aria-labelledby="range-slider"
                       valueLabelDisplay="on"
@@ -118,7 +118,7 @@ const Notifications = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated your limits  {limits.temperatureLowerLimit}<small>km/h</small> - {limits.temperatureUpperLimit}<small>km/h</small>
+                    updated your limits  {limits.speedLowerLimit}<small>km/h</small> - {limits.speedUpperLimit}<small>km/h</small>
                   </div>
                 </CardFooter>
               </Card>
@@ -133,8 +133,8 @@ const Notifications = ()=> {
                   <h3 className={classes.cardTitle}>
                     Recommended Values
                     <Slider
-                        value={humValue}
-                        onChange={humHandleChange}
+                        value={heartRateValue}
+                        onChange={heartRateHandleChange}
                         valueLabelDisplay="auto"
                         aria-labelledby="range-slider"
                         valueLabelDisplay="on"
@@ -144,7 +144,7 @@ const Notifications = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated your limits  {limits.humidityLowerLimit} <small>bpm</small>  -  {limits.humidityUpperLimit} <small>bpm</small>
+                    updated your limits  {limits.heartRateLowerLimit} <small>bpm</small>  -  {limits.heartRateUpperLimit} <small>bpm</small>
                   </div>
                 </CardFooter>
               </Card>
@@ -159,8 +159,8 @@ const Notifications = ()=> {
                   <h3 className={classes.cardTitle}>
                     Recommended Values
                     <Slider
-                      value={tempValue}
-                      onChange={tempHandleChange}
+                      value={speedValue}
+                      onChange={speedHandleChange}
                       valueLabelDisplay="auto"
                       aria-labelledby="range-slider"
                       valueLabelDisplay="on"
@@ -170,7 +170,7 @@ const Notifications = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated your limits  {limits.temperatureLowerLimit}<small>km/h</small> - {limits.temperatureUpperLimit}<small>km/h</small>
+                    updated your limits  {limits.speedLowerLimit}<small>km/h</small> - {limits.speedUpperLimit}<small>km/h</small>
                   </div>
                 </CardFooter>
               </Card>
@@ -185,8 +185,8 @@ const Notifications = ()=> {
                   <h3 className={classes.cardTitle}>
                     Recommended Values
                     <Slider
-                        value={humValue}
-                        onChange={humHandleChange}
+                        value={heartRateValue}
+                        onChange={heartRateHandleChange}
                         valueLabelDisplay="auto"
                         aria-labelledby="range-slider"
                         valueLabelDisplay="on"
@@ -196,7 +196,7 @@ const Notifications = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated your limits  {limits.humidityLowerLimit} <small>bpm</small>  -  {limits.humidityUpperLimit} <small>bpm</small>
+                    updated your limits  {limits.heartRateLowerLimit} <small>bpm</small>  -  {limits.heartRateUpperLimit} <small>bpm</small>
                   </div>
                 </CardFooter>
               </Card>
