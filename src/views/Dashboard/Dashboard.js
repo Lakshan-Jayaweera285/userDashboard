@@ -26,8 +26,6 @@ import Loader from 'components/Loader/Loader.js';
 //Semantic Ui icons
 import { Icon } from 'semantic-ui-react';
 
-import { speedChart, heartRateChart, waterLevelChart, humidityChart, temparetureChart } from 'variables/charts.js';
-
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 
 const useStyles = makeStyles(styles);
@@ -58,7 +56,7 @@ const Dashboard = () => {
         <div>
           <Loader />
         </div>
-      }
+      )}
       {userOneSpeed.length ?(!data.loading && 
         <div>
           <GridContainer>
@@ -205,9 +203,10 @@ const Dashboard = () => {
               </Card>
             </GridItem>
           </GridContainer>
-        </div>
-       ):null }
-    </div>
-  );
-};
+          </div>
+          ):null }
+       </div>
+   
+     );
+   }
 export default Dashboard;
