@@ -1,24 +1,20 @@
 /*eslint-disable*/
-import React from "react";
+import React from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Hidden from "@material-ui/core/Hidden";
+import { makeStyles } from '@material-ui/core/styles';
+import Hidden from '@material-ui/core/Hidden';
 // core components
-import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
+import GridItem from 'components/Grid/GridItem.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import Card from 'components/Card/Card.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/material-dashboard-react/views/iconsStyle.js";
+import styles from 'assets/jss/material-dashboard-react/views/iconsStyle.js';
 
 const useStyles = makeStyles(styles);
 
 export default function Icons() {
   const classes = useStyles();
-  return (
-    <GridContainer>
-      Advertisements are not available yet
-    </GridContainer>
-  );
+  return <GridContainer>Advertisements are not available yet</GridContainer>;
 }

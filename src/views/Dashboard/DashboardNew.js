@@ -43,7 +43,7 @@ const useStyles = makeStyles(styles);
 const Dashboard = ()=> {
   const classes = useStyles();
   const dispatch =useDispatch();
-  const data =useSelector((state)=>state.dashboardReducer);
+  const data = useSelector((state) => state.dashboardReducer);
   
   useEffect(() => {
     dispatch(getAllCards()); 
