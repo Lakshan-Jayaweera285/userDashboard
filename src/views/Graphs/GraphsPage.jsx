@@ -42,7 +42,13 @@ const Dashboard = ()=> {
   const classes = useStyles();
   const dispatch =useDispatch();
   const data = useSelector((state) => state.dashboardReducer);
-  
+  const usersList = useSelector((state) => state.devicesListReducer);
+
+  const cycle1User = usersList.currentCycle1User?.userName ?? 'User 1';
+  const cycle2User = usersList.currentCycle2User?.userName ?? 'User 2';
+
+  console.log(data.cards);
+
   useEffect(() => {
     dispatch(getAllCards()); 
   },[dispatch]);

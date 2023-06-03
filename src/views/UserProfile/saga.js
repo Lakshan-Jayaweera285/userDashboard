@@ -1,7 +1,7 @@
 import { put, call, takeEvery, take } from 'redux-saga/effects';
 import { GET_USER, GET_USER_SUCCESS, ADD_USER, ADD_USER_SUCCESS } from './action';
 import { eventChannel } from 'redux-saga';
-import { firestore } from '../../config/Firebase';
+import { firestore, addDoc } from '../../config/Firebase';
 
 function* callGetAllCardsSagas() {
   const ref = firestore.collection('Users');
@@ -25,9 +25,7 @@ export function* watchGetUser() {
 //sending data to firebase
 async function addNewCardAsync(data) {
   await firestore
-    .collection('Users')
-    .doc('fqXBiT2rI9hx2G6WbNoD')
-    .update({ ...data, created: Date.now() })
+    .collection('Users').add({ ...data})
     .then(() => {
       console.log('Document successfully updated!');
     })

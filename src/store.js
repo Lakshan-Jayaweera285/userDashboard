@@ -1,7 +1,7 @@
 import { fork } from 'redux-saga/effects';
 import { watchGetAllCards } from './views/Dashboard/saga';
 import { watchAddNewUser, watchGetUser } from './views/UserProfile/saga';
-import { watchGetAllDevices } from './views/TableList/sasga';
+import { watchGetAllDevices, watchAddUserToCycle } from './views/TableList/sasga';
 import { watchGetAllLimits, watchAddNewLimits } from './views/Notifications/saga';
 
 export default function* rootSaga() {
@@ -11,4 +11,5 @@ export default function* rootSaga() {
   yield fork(watchGetAllDevices);
   yield fork(watchAddNewLimits);
   yield fork(watchGetAllLimits);
+  yield fork(watchAddUserToCycle);
 }
