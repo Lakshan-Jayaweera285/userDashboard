@@ -10,7 +10,7 @@ import {firestore} from "../../config/Firebase";
 function* callGetAllCardsSagas() {
    // const ref= firestore.collection('Devices').orderBy("created","desc");
    // const channel = eventChannel((emit)=>ref.onSnapshot(emit));
-    const ref1= firestore.collection('UserOneSpeed');
+    const ref1= firestore.collection('UserOneSpeed').orderBy("time","desc");
     const channel1 = eventChannel((emit)=>ref1.onSnapshot(emit));
     const ref2= firestore.collection('UserTwoSpeed');
     const channel2 = eventChannel((emit)=>ref2.onSnapshot(emit));
@@ -19,13 +19,13 @@ function* callGetAllCardsSagas() {
     const ref4= firestore.collection('UserTwoHeart');
     const channel4 = eventChannel((emit)=>ref4.onSnapshot(emit));
     const ref5= firestore.collection('UserOneDistance');
-    const channel5 = eventChannel((emit)=>ref1.onSnapshot(emit));
+    const channel5 = eventChannel((emit)=>ref5.onSnapshot(emit));
     const ref6= firestore.collection('UserTwoDistance');
-    const channel6 = eventChannel((emit)=>ref2.onSnapshot(emit));
+    const channel6 = eventChannel((emit)=>ref6.onSnapshot(emit));
     const ref7= firestore.collection('UserOneOxygen');
-    const channel7 = eventChannel((emit)=>ref3.onSnapshot(emit));
+    const channel7 = eventChannel((emit)=>ref7.onSnapshot(emit));
     const ref8= firestore.collection('UserTwoOxygen');
-    const channel8 = eventChannel((emit)=>ref4.onSnapshot(emit));
+    const channel8 = eventChannel((emit)=>ref8.onSnapshot(emit));
 
     while(true){
         try {

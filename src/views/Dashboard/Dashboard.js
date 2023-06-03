@@ -72,7 +72,7 @@ const Dashboard = ()=> {
         <div>
           <GridContainer>
             <GridItem xs={12} sm={6} md={3}>
-              <Card>
+              <Card style={{ width: '100%', height: '100%' }}>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
                   <SpeedIcon/>
@@ -85,64 +85,31 @@ const Dashboard = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated 5 seconds ago
+                    updated every 5 seconds 
                   </div>
                 </CardFooter>
               </Card>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
-          <Card>
+          <Card style={{ width: '100%', height: '100%' }}>
         <CardHeader color="success" stats icon>
           <CardIcon color="success">
             <LocationOnIcon />
           </CardIcon>
           <p className={classes.cardCategory}>Distance User 1</p>
-          <h3 className={classes.cardTitle}>{userOneDistance[0].distance} km</h3>
+          <h3 className={classes.cardTitle}>{userOneDistance[0].distance} m</h3>
           </CardHeader>
           <CardFooter stats>
           <div className={classes.stats}>
             <AccessTime />
-            updated 15 seconds ago
+            updated every 10 seconds 
             </div>
           </CardFooter>
           </Card>
             </GridItem>
+
             <GridItem xs={12} sm={6} md={3}>
-          <Card>
-        <CardHeader color="warning" stats icon>
-          <CardIcon color="warning">
-            <EcoIcon />
-          </CardIcon>
-          <p className={classes.cardCategory}>Oxygen Saturation User 1</p>
-          <h3 className={classes.cardTitle}>{userOneOxygen[0].saturation}%</h3>
-        </CardHeader>
-        <CardFooter stats>
-          <div className={classes.stats}>
-            <AccessTime />
-            updated 20 seconds ago
-          </div>
-        </CardFooter>
-        </Card>
-          </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
-                <CardHeader color="rose" stats icon>
-                  <CardIcon color="rose">
-                    <Favorite/>
-                  </CardIcon>
-                  <p className={classes.cardCategory}>Heart Rate User 1</p>
-                  <h3 className={classes.cardTitle}>{userOneHeart[0].bpm}bpm</h3>
-                </CardHeader>
-                <CardFooter stats>
-                  <div className={classes.stats}>
-                    <AccessTime />
-                    updated 10 seconds ago
-                  </div>
-                </CardFooter>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
+              <Card style={{ width: '100%', height: '100%' }}>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
                   <SpeedIcon/>
@@ -155,13 +122,82 @@ const Dashboard = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated 5 seconds ago
+                    updated every 5 seconds
+                  </div>
+                </CardFooter>
+              </Card>
+            </GridItem>
+
+            <GridItem xs={12} sm={6} md={3}>
+          <Card style={{ width: '100%', height: '100%' }}>
+        <CardHeader color="success" stats icon>
+          <CardIcon color="success">
+            <LocationOnIcon />
+          </CardIcon>
+          <p className={classes.cardCategory}>Distance User 2</p>
+          <h3 className={classes.cardTitle}>{userTwoDistance[0].distance} m</h3>
+          </CardHeader>
+          <CardFooter stats>
+          <div className={classes.stats}>
+            <AccessTime />
+            updated every 10 seconds
+            </div>
+          </CardFooter>
+          </Card>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
+          <Card style={{ width: '100%', height: '100%' }}>
+        <CardHeader color="warning" stats icon>
+          <CardIcon color="warning">
+            <EcoIcon />
+          </CardIcon>
+          <p className={classes.cardCategory}>Oxygen Saturation User 1</p>
+          <h3 className={classes.cardTitle}>{userOneOxygen[0].spo2}%</h3>
+        </CardHeader>
+        <CardFooter stats>
+          <div className={classes.stats}>
+            <AccessTime />
+            updated every 10 seconds
+          </div>
+        </CardFooter>
+        </Card>
+          </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
+              <Card style={{ width: '100%', height: '100%' }}>
+                <CardHeader color="rose" stats icon>
+                  <CardIcon color="rose">
+                    <Favorite/>
+                  </CardIcon>
+                  <p className={classes.cardCategory}>Heart Rate User 1</p>
+                  <h3 className={classes.cardTitle}>{userOneHeart[0].bpm}bpm</h3>
+                </CardHeader>
+                <CardFooter stats>
+                  <div className={classes.stats}>
+                    <AccessTime />
+                    updated every 10 seconds
                   </div>
                 </CardFooter>
               </Card>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
-              <Card>
+          <Card style={{ width: '100%', height: '100%' }}>
+        <CardHeader color="warning" stats icon>
+          <CardIcon color="warning">
+            <EcoIcon />
+          </CardIcon>
+          <p className={classes.cardCategory}>Oxygen Saturation User 2</p>
+          <h3 className={classes.cardTitle}>{userTwoOxygen[0].spo2}%</h3>
+        </CardHeader>
+        <CardFooter stats>
+          <div className={classes.stats}>
+            <AccessTime />
+            updated every 10 seconds
+          </div>
+        </CardFooter>
+        </Card>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+              <Card style={{ width: '100%', height: '100%' }}>
                 <CardHeader color="rose" stats icon>
                   <CardIcon color="rose">
                     <Favorite/>
@@ -172,7 +208,7 @@ const Dashboard = ()=> {
                 <CardFooter stats>
                   <div className={classes.stats}>
                     <AccessTime />
-                    updated 10 seconds ago
+                    updated every 10 seconds
                   </div>
                 </CardFooter>
               </Card>

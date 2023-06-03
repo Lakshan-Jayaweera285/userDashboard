@@ -53,7 +53,7 @@ export default function TableList() {
     dispatch(getAllDevices()); 
   },[dispatch]);
   //console.log(data,"data")
-  const devices = data.devices;
+  const devices = data.users;
   const devicesList = data.devices[0];
   const tableData = devices.map((item,index)=>{
     return [index+1, item.deviceName, item.status, item.created.toDate().toDateString()]
