@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ChartistGraph from 'react-chartist';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-//import {getAllCards } from "./action";
+import {getAllCards } from "./action";
 // @material-ui/core
 import { makeStyles } from '@material-ui/core/styles';
 // @material-ui/icons
@@ -37,9 +37,11 @@ const GraphsPage = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.dashboardReducer);
 
-  // useEffect(() => {
-  //   dispatch(getAllCards());
-  // },[dispatch]);
+  console.log(data.cards);
+
+  useEffect(() => {
+    dispatch(getAllCards());
+  },[dispatch]);
 
   // const devicesData = data.cards.data[0];
   const userOneSpeed = data.cards.data1;

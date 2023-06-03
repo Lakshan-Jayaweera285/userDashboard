@@ -22,4 +22,3 @@ function devicesListReducer(state = initialState, action) {
   }
 }
 export default devicesListReducer;
-S
