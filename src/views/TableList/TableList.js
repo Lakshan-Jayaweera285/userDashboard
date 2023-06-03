@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllDevices, addUserToCycle } from './action';
-import { getUser, addNewUser } from '../UserProfile/action'
+import { getUser, addNewUser } from '../UserProfile/action';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 // core components
@@ -17,44 +17,14 @@ import TextField from '@material-ui/core/TextField';
 
 // core components
 import CardFooter from 'components/Card/CardFooter.js';
-
-const styles = {
-  cardCategoryWhite: {
-    '&,& a,& a:hover,& a:focus': {
-      color: 'rgba(255,255,255,.62)',
-      margin: '0',
-      fontSize: '14px',
-      marginTop: '0',
-      marginBottom: '0',
-    },
-    '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-    '& small': {
-      color: '#777',
-      fontSize: '65%',
-      fontWeight: '400',
-      lineHeight: '1',
-    },
-  },
-};
+import { styles } from './tableListStyles';
 
 const useStyles = makeStyles(styles);
 
 export default function TableList() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.devicesListReducer);
-  const userProfileData = useSelector((state) => state.userProfileReducer);
+  const usersList = useSelector((state) => state.devicesListReducer);
   const [isAddUserFormVisible, setIsAddUserFormVisible] = useState(false);
 
   // Form Values
@@ -71,15 +41,7 @@ export default function TableList() {
     dispatch(getAllDevices());
   }, [dispatch]);
 
-  console.log(data, 'data');
-
-  const handleAddUserFormClick = () => {
-    setIsAddUserFormVisible(true);
-  };
-
-  const handleCloseAddUserForm = () => {
-    setIsAddUserFormVisible(false);
-  };
+  console.log(usersList, 'usersList');
 
   const handleAddUserForm = (e) => {
     e.preventDefault();
@@ -94,9 +56,9 @@ export default function TableList() {
       postalCode: postal,
       userName: userName,
     };
-    console.log(user);
-    if (!(company === '')) {
+    if (company && userName && email && firstName && lastName && postal && country && city) {
       dispatch(addNewUser(user));
+      setIsAddUserFormVisible(false);
     }
     setCompany('');
     setCountry('');
@@ -106,42 +68,67 @@ export default function TableList() {
     setPostal('');
     setFirstName('');
     setLastName('');
-    //dispatch(getUser());
+  };
+
+  const handleUsersFormClose = () => {
     setIsAddUserFormVisible(false);
   };
 
-  const devices = data.devices;
-  const devicesList = data.devices[0];
-  const tableData = devices.map((item, index) => {
+  const users = usersList.devices;
+  const tableData = users.map((item, index) => {
     return [
       index + 1,
       item.userName,
       item.email,
-      <Button
-        onClick={() => {
-          dispatch(addUserToCycle({ item }, '1'));
-        }}
-      >
-        currentBicycle:{' '}
-        {item.userName === data.currentCycle1User?.item?.userName
-          ? '1'
-          : item.userName === data.currentCycle2User?.item?.userName
-          ? '2'
-          : 'No cycle Assigned'}
-      </Button>,
+      <>
+        {item.userName === usersList.currentCycle1User?.userName ? (
+          <Button color='blue'
+            onClick={() => {
+              dispatch(addUserToCycle({}, '1'));
+            }}
+          >
+            Remove From Cycle 1
+          </Button>
+        ) : item.userName === usersList.currentCycle2User?.userName ? (
+          <Button color='pink'
+            onClick={() => {
+              dispatch(addUserToCycle({}, '2'));
+            }}
+          >
+            Remove From Cycle 2
+          </Button>
+        ) : (
+          <>
+            <Button color='yellow'
+              onClick={() => {
+                dispatch(addUserToCycle({ ...item }, '1'));
+              }}
+            >
+              Add to Cycle 1
+            </Button>
+            <Button color='yellow'
+              onClick={() => {
+                dispatch(addUserToCycle({ ...item }, '2'));
+              }}
+            >
+              Add to Cycle 2
+            </Button>
+          </>
+        )}
+      </>,
     ];
   });
   // console.log(tableData)
 
   return (
     <div>
-      {data.loading && (
+      {usersList.loading && (
         <div>
           <Loader />
         </div>
       )}
-      {devicesList
-        ? !data.loading && (
+      {users.length > 0
+        ? !usersList.loading && (
             <div>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
@@ -153,7 +140,7 @@ export default function TableList() {
                     <CardBody>
                       <Table
                         tableHeaderColor="primary"
-                        tableHead={['No', 'User Name', 'Email', 'Status',]}
+                        tableHead={['No', 'User Name', 'Email', 'Status']}
                         tableData={tableData.map((item) => {
                           return item;
                         })}
@@ -162,13 +149,15 @@ export default function TableList() {
                   </Card>
                 </GridItem>
                 <GridItem>
-                  {!isAddUserFormVisible && <Button
-                    onClick={(e) => {
-                      setIsAddUserFormVisible(!isAddUserFormVisible);
-                    }}
-                  >
-                    Add User
-                  </Button>}
+                  {!isAddUserFormVisible && (
+                    <Button
+                      onClick={(e) => {
+                        setIsAddUserFormVisible(!isAddUserFormVisible);
+                      }}
+                    >
+                      Add User
+                    </Button>
+                  )}
                 </GridItem>
               </GridContainer>
             </div>
@@ -305,6 +294,9 @@ export default function TableList() {
             <CardFooter>
               <Button color="green" onClick={handleAddUserForm}>
                 Add User
+              </Button>
+              <Button color="yellow" onClick={handleUsersFormClose}>
+                Close
               </Button>
             </CardFooter>
           </Card>
