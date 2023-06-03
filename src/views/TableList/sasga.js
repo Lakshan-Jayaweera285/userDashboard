@@ -1,5 +1,5 @@
 import { put, call, takeEvery, take } from 'redux-saga/effects';
-import { GET_DEVICES, GET_DEVICES_SUCCESS } from './action';
+import { GET_DEVICES, GET_DEVICES_SUCCESS, ADD_USER_TO_1, ADD_USER_TO_2 } from './action';
 import { eventChannel } from 'redux-saga';
 import { firestore } from '../../config/Firebase';
 
@@ -20,4 +20,17 @@ function* callGetAllCardsSagas() {
 }
 export function* watchGetAllDevices() {
   yield takeEvery(GET_DEVICES, callGetAllCardsSagas);
+}
+
+function* addUserToCycle(user, cycle) {
+  if (cycle === '1') {
+    yield put({type: ADD_USER_TO_1, data: user})
+  }
+  if (cycle === '1') {
+    yield put({type: ADD_USER_TO_2, data: user})
+  }
+}
+
+export function* watchAddUserToCycle() {
+  yield takeEvery([ADD_USER_TO_1, ADD_USER_TO_2], addUserToCycle);
 }
