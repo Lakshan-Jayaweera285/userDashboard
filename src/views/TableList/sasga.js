@@ -4,7 +4,7 @@ import { eventChannel } from 'redux-saga';
 import { firestore } from '../../config/Firebase';
 
 function* callGetAllCardsSagas() {
-  const ref = firestore.collection('Devices').orderBy('created', 'desc');
+  const ref = firestore.collection('Users').orderBy('userName', 'desc');
   const channel = eventChannel((emit) => ref.onSnapshot(emit));
   while (true) {
     try {

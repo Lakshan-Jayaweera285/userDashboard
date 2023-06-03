@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ChartistGraph from 'react-chartist';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import {getAllCards } from "./action";
+import { getAllCards } from './action';
 // @material-ui/core
 import { makeStyles } from '@material-ui/core/styles';
 // @material-ui/icons
@@ -41,7 +41,7 @@ const GraphsPage = () => {
 
   useEffect(() => {
     dispatch(getAllCards());
-  },[dispatch]);
+  }, [dispatch]);
 
   // const devicesData = data.cards.data[0];
   const userOneSpeed = data.cards.data1;
@@ -52,21 +52,19 @@ const GraphsPage = () => {
   const userTwoDistance = data.cards.data6;
   const userOneOxygen = data.cards.data7;
   const userTwoOxygen = data.cards.data8;
-  // console.log(userOneBicycleData[0]);
+
+  if (data.loading) {
+    return <Loader />;
+  }
 
   return (
     <div>
-      {data.loading && (
-        <div>
-          <Loader />
-        </div>
-      )}
       {userOneSpeed.length
         ? !data.loading && (
             <div>
-              <GridContainer>
+              <GridContainer key={'latestUpdateCardsContainer'}>
                 <GridItem xs={12} sm={6} md={3}>
-                  <Card>
+                  <Card key={'user1speed'}>
                     <CardHeader color="info" stats icon>
                       <CardIcon color="info">
                         <SpeedIcon />
@@ -74,7 +72,7 @@ const GraphsPage = () => {
                       <p className={classes.cardCategory}>Bicycle Speed User 1</p>
                       <h3 className={classes.cardTitle}>
                         {userOneSpeed[0].speed}
-                        <small>km/h</small>
+                        <small> km/h</small>
                       </h3>
                     </CardHeader>
                     <CardFooter stats>
@@ -86,13 +84,16 @@ const GraphsPage = () => {
                   </Card>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={3}>
-                  <Card>
+                  <Card key={'user1heart'}>
                     <CardHeader color="rose" stats icon>
                       <CardIcon color="rose">
                         <Favorite />
                       </CardIcon>
                       <p className={classes.cardCategory}>Heart Rate User 1</p>
-                      <h3 className={classes.cardTitle}>{userOneHeart[0].bpm}bpm</h3>
+                      <h3 className={classes.cardTitle}>
+                        {userOneHeart[0].bpm}
+                        <small> bpm</small>
+                      </h3>
                     </CardHeader>
                     <CardFooter stats>
                       <div className={classes.stats}>
@@ -103,7 +104,7 @@ const GraphsPage = () => {
                   </Card>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={3}>
-                  <Card>
+                  <Card key={'user2speed'}>
                     <CardHeader color="info" stats icon>
                       <CardIcon color="info">
                         <SpeedIcon />
@@ -123,7 +124,7 @@ const GraphsPage = () => {
                   </Card>
                 </GridItem>
                 <GridItem xs={12} sm={6} md={3}>
-                  <Card>
+                  <Card key={'user2heart'}>
                     <CardHeader color="rose" stats icon>
                       <CardIcon color="rose">
                         <Favorite />
@@ -140,7 +141,7 @@ const GraphsPage = () => {
                   </Card>
                 </GridItem>
               </GridContainer>
-              <GridContainer>
+              <GridContainer key={'graphsContainer'}>
                 <GridItem xs={12} sm={6} md={3}>
                   <Card chart>
                     <CardHeader color="info">
@@ -157,12 +158,12 @@ const GraphsPage = () => {
                     </CardHeader>
                     <CardBody>
                       <h4 className={classes.cardTitle}>Speed Chart User 1</h4>
-                      {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
+                      <p className={classes.cardCategory}>
+                        <span className={classes.successText}>
+                          <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                        </span>{' '}
+                        increase in last 3 hours.
+                      </p>
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
