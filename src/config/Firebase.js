@@ -1,12 +1,14 @@
 import firebase from "firebase";
 import "firebase/firestore";
+
+
 var firebaseConfig = {
-  apiKey: "AIzaSyD1f116A_xUuz3h-JuQ-JD2I2ryDtX8meI",
-  authDomain: "weather-app-96599.firebaseapp.com",
-  projectId: "weather-app-96599",
-  storageBucket: "weather-app-96599.appspot.com",
-  messagingSenderId: "670097278150",
-  appId: "1:670097278150:web:b84a99bbb792f78efc03c7"
+  apiKey: "AIzaSyAiVJzsmcIyF_3djeUGiN-tAEZi_quTarQ",
+  authDomain: "competitive-virtual-cycling.firebaseapp.com",
+  projectId: "competitive-virtual-cycling",
+  storageBucket: "competitive-virtual-cycling.appspot.com",
+  messagingSenderId: "751663427874",
+  appId: "1:751663427874:web:453ab9854b1b8ce1f6357b"
   };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);

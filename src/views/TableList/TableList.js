@@ -72,15 +72,15 @@ export default function TableList() {
             <GridItem xs={12} sm={12} md={12}>
               <Card>
                 <CardHeader color="primary">
-                  <h4 className={classes.cardTitleWhite}>Devices List</h4>
+                  <h4 className={classes.cardTitleWhite}>Users List</h4>
                   <p className={classes.cardCategoryWhite}>
-                    Here is your all Zeagro devices
+                    Here is the all virtual cycling platform users list
                   </p>
                 </CardHeader>
                 <CardBody>
                   <Table
                     tableHeaderColor="primary"
-                    tableHead={["No", "Device Code", "Status", "Deployed"]}
+                    tableHead={["No", "User Name", "Email", "Status", "Registered"]}
                     tableData={tableData.map((item)=>{
                       return item
                     })}

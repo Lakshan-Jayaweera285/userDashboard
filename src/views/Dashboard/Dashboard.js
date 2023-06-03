@@ -49,12 +49,16 @@ const Dashboard = ()=> {
     dispatch(getAllCards()); 
   },[dispatch]);
 
-  const devicesData = data.cards.data[0];
-  const userOneBicycleData = data.cards.data1;
-  const userTwoBicycleData = data.cards.data2;
-  const userOneHeartData = data.cards.data3;
-  const userTwoHeartData = data.cards.data4;
-  console.log(userOneBicycleData[0]);
+ // const devicesData = data.cards.data[0];
+  const userOneSpeed = data.cards.data1;
+  const userTwoSpeed = data.cards.data2;
+  const userOneHeart = data.cards.data3;
+  const userTwoHeart = data.cards.data4;
+  const userOneDistance = data.cards.data5;
+  const userTwoDistance = data.cards.data6;
+  const userOneOxygen = data.cards.data7;
+  const userTwoOxygen = data.cards.data8;
+ // console.log(userOneBicycleData[0]);
  
   
   return (
@@ -64,7 +68,7 @@ const Dashboard = ()=> {
           <Loader/>
         </div>
       }
-      {devicesData ?(!data.loading && 
+      {userOneSpeed.length ?(!data.loading && 
         <div>
           <GridContainer>
             <GridItem xs={12} sm={6} md={3}>
@@ -75,7 +79,7 @@ const Dashboard = ()=> {
                   </CardIcon>
                   <p className={classes.cardCategory}>Bicycle Speed User 1</p>
                   <h3 className={classes.cardTitle}>
-                    {devicesData.temperature}<small>km/h</small>
+                    {userOneSpeed[0].speed}<small>km/h</small>
                   </h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -87,13 +91,47 @@ const Dashboard = ()=> {
               </Card>
             </GridItem>
             <GridItem xs={12} sm={6} md={3}>
+          <Card>
+        <CardHeader color="success" stats icon>
+          <CardIcon color="success">
+            <LocationOnIcon />
+          </CardIcon>
+          <p className={classes.cardCategory}>Distance User 1</p>
+          <h3 className={classes.cardTitle}>{userOneDistance[0].distance} km</h3>
+          </CardHeader>
+          <CardFooter stats>
+          <div className={classes.stats}>
+            <AccessTime />
+            updated 15 seconds ago
+            </div>
+          </CardFooter>
+          </Card>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
+          <Card>
+        <CardHeader color="warning" stats icon>
+          <CardIcon color="warning">
+            <EcoIcon />
+          </CardIcon>
+          <p className={classes.cardCategory}>Oxygen Saturation User 1</p>
+          <h3 className={classes.cardTitle}>{userOneOxygen[0].saturation}%</h3>
+        </CardHeader>
+        <CardFooter stats>
+          <div className={classes.stats}>
+            <AccessTime />
+            updated 20 seconds ago
+          </div>
+        </CardFooter>
+        </Card>
+          </GridItem>
+            <GridItem xs={12} sm={6} md={3}>
               <Card>
                 <CardHeader color="rose" stats icon>
                   <CardIcon color="rose">
                     <Favorite/>
                   </CardIcon>
                   <p className={classes.cardCategory}>Heart Rate User 1</p>
-                  <h3 className={classes.cardTitle}>{devicesData.humidity}bpm</h3>
+                  <h3 className={classes.cardTitle}>{userOneHeart[0].bpm}bpm</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>
@@ -111,7 +149,7 @@ const Dashboard = ()=> {
                   </CardIcon>
                   <p className={classes.cardCategory}>Bicycle Speed User 2</p>
                   <h3 className={classes.cardTitle}>
-                    {devicesData.temperature}<small>km/h</small>
+                    {userTwoSpeed[0].speed}<small>km/h</small>
                   </h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -129,7 +167,7 @@ const Dashboard = ()=> {
                     <Favorite/>
                   </CardIcon>
                   <p className={classes.cardCategory}>Heart Rate User 2</p>
-                  <h3 className={classes.cardTitle}>{devicesData.humidity}bpm</h3>
+                  <h3 className={classes.cardTitle}>{userTwoHeart[0].bpm}bpm</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>
@@ -140,130 +178,6 @@ const Dashboard = ()=> {
               </Card>
             </GridItem>
           </GridContainer>
-          <GridContainer>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card chart>
-                <CardHeader color="info">
-                  <ChartistGraph
-                    className="ct-chart"
-                    data={{
-                      labels: Array.from({length: Object.keys(userOneBicycleData).length}, (_, i) => (i + 1)*5),
-                      series: [userOneBicycleData.map((item)=>item.speed)],
-                    }}
-                    type="Line"
-                    options={speedChart.options}
-                    listener={speedChart.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Speed Chart User 1</h4>
-                  {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
-                </CardBody>
-                <CardFooter chart>
-                  <div className={classes.stats}>
-                    <AccessTime /> updated 90 seconds ago
-                  </div>
-                </CardFooter>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card chart>
-                <CardHeader color="rose">
-                  <ChartistGraph
-                    className="ct-chart"
-                    data={{
-                      labels: Array.from({length: Object.keys(userOneHeartData).length}, (_, i) => (i + 1)*5),
-                      series: [userOneHeartData.map((item)=>item.bpm)],
-                    }}
-                    type="Line"
-                    options={heartRateChart.options}
-                    listener={heartRateChart.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Heart Rate Chart User 1</h4>
-                  {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
-                </CardBody>
-                <CardFooter chart>
-                  <div className={classes.stats}>
-                    <AccessTime /> updated 90 seconds ago
-                  </div>
-                </CardFooter>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card chart>
-                <CardHeader color="info">
-                  <ChartistGraph
-                    className="ct-chart"
-                    data={{
-                      labels: Array.from({length: Object.keys(userTwoBicycleData).length}, (_, i) => (i + 1)*5),
-                      series: [userTwoBicycleData.map((item)=>item.speed)],
-                    }}
-                    type="Line"
-                    options={speedChart.options}
-                    listener={speedChart.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Speed Chart User 2</h4>
-                  {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
-                </CardBody>
-                <CardFooter chart>
-                  <div className={classes.stats}>
-                    <AccessTime /> updated 90 seconds ago
-                  </div>
-                </CardFooter>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card chart>
-                <CardHeader color="rose">
-                  <ChartistGraph
-                    className="ct-chart"
-                    data={{
-                      labels: Array.from({length: Object.keys(userTwoHeartData).length}, (_, i) => (i + 1)*5),
-                      series: [userTwoHeartData.map((item)=>item.bpm)],
-                    }}
-                    type="Line"
-                    options={heartRateChart.options}
-                   // responsiveOptions={humidityChart.responsiveOptions}
-                    listener={heartRateChart.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Heart Rate User 2</h4>
-                  {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 50%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
-                </CardBody>
-                <CardFooter chart>
-                  <div className={classes.stats}>
-                    <AccessTime /> updated 90 seconds ago
-                  </div>
-                </CardFooter>
-              </Card>
-            </GridItem>
-          </GridContainer>
-          
         </div>
        ):null }
     </div>

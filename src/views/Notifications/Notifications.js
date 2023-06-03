@@ -43,21 +43,10 @@ const Notifications = ()=> {
 
   const [speedValue, setspeedValue] = useState([0,45]);
   const [heartRateValue, setheartRateValue] = useState([50, 160]);
-  const [waterValue, setWaterValue] = useState([50, 90]);
+  
  
   
-  const handleChangeAutoMode = (event)=>{
-    const motor = {
-       motorAutoMode:event.target.checked
-    }
-    dispatch(addNewLimits(motor))   
-  }
-  const handleChangeMotorSwitch = (event)=>{
-    const motor = {
-       motorSwitch:event.target.checked
-    }
-    dispatch(addNewLimits(motor))   
-  }
+  
   
 
   const speedHandleChange = (event, newValue) => {

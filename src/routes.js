@@ -8,6 +8,7 @@ import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
+//import GraphPage from "views/Graphs/Dashboard.js"
 import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
 import Icons from "views/Icons/Icons.js";
@@ -25,6 +26,7 @@ const dashboardRoutes = [
     component: DashboardPage,
     layout: "/admin",
   },
+  
   {
     path: "/user",
     name: "User Profile",
@@ -35,9 +37,9 @@ const dashboardRoutes = [
   },
   {
     path: "/table",
-    name: "Devices",
+    name: "Users",
     rtlName: "قائمة الجدول",
-    icon: RouterIcon,
+    icon: Person,
     component: TableList,
     layout: "/admin",
   },
@@ -49,22 +51,7 @@ const dashboardRoutes = [
     component: NotificationsPage,
     layout: "/admin",
   },
-  {
-    path: "/icons",
-    name: "Store",
-    rtlName: "الرموز",
-    icon: StoreIcon,
-    component: Icons,
-    layout: "/admin",
-  },
-  {
-    path: "/upgrade-to-pro",
-    name: "Log Out",
-    rtlName: "التطور للاحترافية",
-    icon: PowerSettingsNewIcon,
-    component: UpgradeToPro,
-    layout: "/admin",
-  },
+
 ];
 
 export default dashboardRoutes;
