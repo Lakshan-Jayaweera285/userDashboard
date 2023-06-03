@@ -36,6 +36,10 @@ const GraphsPage = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.dashboardReducer);
+  const usersList = useSelector((state) => state.devicesListReducer);
+
+  const cycle1User = usersList.currentCycle1User?.userName ?? 'User 1';
+  const cycle2User = usersList.currentCycle2User?.userName ?? 'User 2';
 
   console.log(data.cards);
 
@@ -69,7 +73,7 @@ const GraphsPage = () => {
                       <CardIcon color="info">
                         <SpeedIcon />
                       </CardIcon>
-                      <p className={classes.cardCategory}>Bicycle Speed User 1</p>
+                      <p className={classes.cardCategory}>Bicycle Speed {cycle1User}</p>
                       <h3 className={classes.cardTitle}>
                         {userOneSpeed[0].speed}
                         <small> km/h</small>
@@ -89,7 +93,7 @@ const GraphsPage = () => {
                       <CardIcon color="rose">
                         <Favorite />
                       </CardIcon>
-                      <p className={classes.cardCategory}>Heart Rate User 1</p>
+                      <p className={classes.cardCategory}>Heart Rate {cycle1User}</p>
                       <h3 className={classes.cardTitle}>
                         {userOneHeart[0].bpm}
                         <small> bpm</small>
@@ -109,7 +113,7 @@ const GraphsPage = () => {
                       <CardIcon color="info">
                         <SpeedIcon />
                       </CardIcon>
-                      <p className={classes.cardCategory}>Bicycle Speed User 2</p>
+                      <p className={classes.cardCategory}>Bicycle Speed {cycle2User}</p>
                       <h3 className={classes.cardTitle}>
                         {userTwoSpeed[0].speed}
                         <small>km/h</small>
@@ -129,7 +133,7 @@ const GraphsPage = () => {
                       <CardIcon color="rose">
                         <Favorite />
                       </CardIcon>
-                      <p className={classes.cardCategory}>Heart Rate User 2</p>
+                      <p className={classes.cardCategory}>Heart Rate {cycle2User}</p>
                       <h3 className={classes.cardTitle}>{userTwoHeart[0].bpm}bpm</h3>
                     </CardHeader>
                     <CardFooter stats>
@@ -157,7 +161,7 @@ const GraphsPage = () => {
                       />
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Speed Chart User 1</h4>
+                      <h4 className={classes.cardTitle}>Speed Chart {cycle1User}</h4>
                       <p className={classes.cardCategory}>
                         <span className={classes.successText}>
                           <ArrowUpward className={classes.upArrowCardCategory} /> 55%
@@ -187,7 +191,7 @@ const GraphsPage = () => {
                       />
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Heart Rate Chart User 1</h4>
+                      <h4 className={classes.cardTitle}>Heart Rate Chart {cycle1User}</h4>
                       {/* <p className={classes.cardCategory}>
                     <span className={classes.successText}>
                       <ArrowUpward className={classes.upArrowCardCategory} /> 55%
@@ -217,7 +221,7 @@ const GraphsPage = () => {
                       />
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Speed Chart User 2</h4>
+                      <h4 className={classes.cardTitle}>Speed Chart {cycle2User}</h4>
                       {/* <p className={classes.cardCategory}>
                     <span className={classes.successText}>
                       <ArrowUpward className={classes.upArrowCardCategory} /> 55%
@@ -248,7 +252,7 @@ const GraphsPage = () => {
                       />
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Heart Rate User 2</h4>
+                      <h4 className={classes.cardTitle}>Heart Rate {cycle2User}</h4>
                       {/* <p className={classes.cardCategory}>
                     <span className={classes.successText}>
                       <ArrowUpward className={classes.upArrowCardCategory} /> 50%
