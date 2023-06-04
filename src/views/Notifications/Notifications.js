@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ChartistGraph from 'react-chartist';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllLimits, addNewLimits } from './action';
+import { getAllLimits, addNewLimits, addNotifications } from './action';
 
 // @material-ui/core
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,11 +22,13 @@ import CardIcon from 'components/Card/CardIcon.js';
 import CardFooter from 'components/Card/CardFooter.js';
 import Loader from 'components/Loader/Loader.js';
 //Semantic Ui icons
-import { Icon } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import { Favorite } from '@material-ui/icons';
 import SpeedIcon from '@material-ui/icons/Speed';
+import { getAllCards } from '../Graphs/action';
 
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
+import warningSound from './Pacman-death-sound.mp3'; // Import your sound file
 
 const useStyles = makeStyles(styles);
 
@@ -34,15 +36,78 @@ const Notifications = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.settingsReducer);
+  const sensorInformation = useSelector((state) => state.dashboardReducer);
+  const usersList = useSelector((state) => state.devicesListReducer);
+
+  const cycle1User = usersList.currentCycle1User?.userName ?? 'User 1';
+  const cycle2User = usersList.currentCycle2User?.userName ?? 'User 2';
+
+  const [speedValue, setspeedValue] = useState([0, 45]);
+  const [heartRate1Value, setheartRate1Value] = useState([50, 160]);
+  const [heartRateValue, setheartRateValue] = useState([50, 160]);
+  const [warningMessage, setWarningMessage] = useState([]);
+
+  useEffect(() => {
+    dispatch(getAllCards());
+  }, [dispatch]);
+
+  const userOneSpeed = sensorInformation.cards.data1;
+  const userOneHeart = sensorInformation.cards.data3;
+  const userOneOxygen = sensorInformation.cards.data7;
+  const userOneDistance = sensorInformation.cards.data5;
+
+  const userTwoSpeed = sensorInformation.cards.data2;
+  const userTwoHeart = sensorInformation.cards.data4;
+  const userTwoDistance = sensorInformation.cards.data6;
+  const userTwoOxygen = sensorInformation.cards.data8;
+
+  const playWarningSound = (type) => {
+    const audioHeartRate = new Audio(warningSound);
+
+    if (type === "heart") {
+      audioHeartRate.play();
+    }
+  }
+
+  useEffect(() => {
+    if (warningMessage.includes('User 1 High Heart Rate') || (warningMessage.includes('User 1 Low Heart Rate')) {
+      playWarningSound('heart');
+    }
+  }, [warningMessage])
 
   useEffect(() => {
     dispatch(getAllLimits());
   }, [dispatch]);
-  const limits = data.limits[0];
-  // console.log(limits,"limits")
 
-  const [speedValue, setspeedValue] = useState([0, 45]);
-  const [heartRateValue, setheartRateValue] = useState([50, 160]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(getAllCards());
+      console.log("userOneHeart", userOneHeart);
+      
+      userOneHeart.map(item => {
+        if(item.bpm > heartRate1Value[1]) {
+          console.log("current", item.bpm , heartRate1Value[1]);
+          setWarningMessage(prevMessages => {
+            const updatedMessages = new Set([...prevMessages, 'User 1 High Heart Rate']);
+          
+            return Array.from(updatedMessages);
+          });
+        } else if (item.bpm < heartRate1Value[0]) {
+          setWarningMessage(prevMessages => {
+            const updatedMessages = new Set([...prevMessages, 'User 1 Low Heart Rate']);
+          
+            return Array.from(updatedMessages);
+          });
+        }
+      })
+  
+    }, 8000);
+
+    
+    return () => clearInterval(interval);
+  }, [dispatch, userOneHeart]);
+
+  const limits = data.limits[0];
 
   const speedHandleChange = (event, newValue) => {
     setspeedValue(newValue);
@@ -52,6 +117,11 @@ const Notifications = () => {
     };
     dispatch(addNewLimits(temp));
   };
+
+  const heartRate1HandleChange = (event, newValue) => {
+    setheartRate1Value(newValue);
+  };
+
   const heartRateHandleChange = (event, newValue) => {
     setheartRateValue(newValue);
     const hum = {
@@ -60,6 +130,11 @@ const Notifications = () => {
     };
     dispatch(addNewLimits(hum));
   };
+
+  const handleCloseWarning = () => {
+    setWarningMessage([]);
+  }
+
   const waterHandleChange = (event, newValue) => {
     setWaterValue(newValue);
     const water = {
@@ -72,24 +147,23 @@ const Notifications = () => {
   // console.log(heartRateValue,"hum");
   // console.log(waterValue,"water")
 
+  if (data.loading) {
+    return <Loader />
+  }
+
   return (
     <div>
-      {data.loading && (
-        <div>
-          <Loader />
-        </div>
-      )}
       {limits
         ? !data.loading && (
             <div>
               <GridContainer>
                 <GridItem xs={12} sm={6} md={6}>
-                  <Card>
+                  <Card key={'user1speedLimit'}>
                     <CardHeader color="info" stats icon>
                       <CardIcon color="info">
                         <SpeedIcon />
                       </CardIcon>
-                      <p className={classes.cardCategory}>Speed Limit User 1</p>
+                      <p className={classes.cardCategory}>Speed Limit {cycle1User}</p>
                       <h3 className={classes.cardTitle}>
                         Recommended Values
                         <Slider
@@ -97,7 +171,6 @@ const Notifications = () => {
                           onChange={speedHandleChange}
                           valueLabelDisplay="auto"
                           aria-labelledby="range-slider"
-                          valueLabelDisplay="on"
                         />
                       </h3>
                     </CardHeader>
@@ -121,11 +194,12 @@ const Notifications = () => {
                       <h3 className={classes.cardTitle}>
                         Recommended Values
                         <Slider
-                          value={heartRateValue}
-                          onChange={heartRateHandleChange}
-                          valueLabelDisplay="auto"
-                          aria-labelledby="range-slider"
+                          min={40}
+                          max={240}
+                          value={heartRate1Value}
+                          onChange={heartRate1HandleChange}
                           valueLabelDisplay="on"
+                          aria-labelledby="range-slider"
                         />
                       </h3>
                     </CardHeader>
@@ -152,7 +226,6 @@ const Notifications = () => {
                           onChange={speedHandleChange}
                           valueLabelDisplay="auto"
                           aria-labelledby="range-slider"
-                          valueLabelDisplay="on"
                         />
                       </h3>
                     </CardHeader>
@@ -180,7 +253,6 @@ const Notifications = () => {
                           onChange={heartRateHandleChange}
                           valueLabelDisplay="auto"
                           aria-labelledby="range-slider"
-                          valueLabelDisplay="on"
                         />
                       </h3>
                     </CardHeader>
@@ -197,6 +269,14 @@ const Notifications = () => {
             </div>
           )
         : null}
+      {warningMessage.length > 0 &&
+        <div>
+        {warningMessage.map(item => 
+          <Button>{item}</Button>
+        )}
+        <Button onClick={handleCloseWarning}>Close</Button>
+      </div>
+      }
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { put, call, takeEvery, take } from 'redux-saga/effects';
-import { GET_LIMITS, GET_LIMITS_SUCCESS, ADD_LIMITS, ADD_LIMITS_SUCCESS } from './action';
+import { GET_LIMITS, GET_LIMITS_SUCCESS, ADD_LIMITS, ADD_LIMITS_SUCCESS, ADD_NOTIFICATIONS } from './action';
 import { eventChannel } from 'redux-saga';
 import { firestore } from '../../config/Firebase';
 
@@ -47,4 +47,12 @@ function* callAddNewCardSagas(action) {
 
 export function* watchAddNewLimits() {
   yield takeEvery(ADD_LIMITS, callAddNewCardSagas);
+}
+
+function* addNotifications(data) {
+  yield put({type: ADD_NOTIFICATIONS, data: data})
+}
+
+export function* watchAddNotifications() {
+  yield takeEvery(ADD_NOTIFICATIONS, addNotifications);
 }

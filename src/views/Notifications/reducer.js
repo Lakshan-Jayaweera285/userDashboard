@@ -9,10 +9,11 @@ const initialState = {
   ],
   loading: false,
   addSuc: false,
+  notifications: [],
 };
 
 function settingsReducer(state = initialState, action) {
-  console.log(action, 'action');
+  console.log(action, 'action settings');
   switch (action.type) {
     case actionTypes.GET_LIMITS:
       return { ...state, loading: true };
@@ -22,6 +23,8 @@ function settingsReducer(state = initialState, action) {
       return { ...state, addSuc: false };
     case actionTypes.ADD_LIMITS_SUCCESS:
       return { ...state, addSuc: true };
+    case actionTypes.ADD_NOTIFICATIONS:
+      return { ...state, notifications: action.data };
     default:
       return state;
   }
