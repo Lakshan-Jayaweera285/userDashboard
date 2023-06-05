@@ -29,6 +29,7 @@ import { getAllCards } from '../Graphs/action';
 
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
 import warningSound from './Pacman-death-sound.mp3'; // Import your sound file
+import warningSoundSpeed from './new-mp3-message-ringtones.mp3';
 
 const useStyles = makeStyles(styles);
 
@@ -42,9 +43,10 @@ const Notifications = () => {
   const cycle1User = usersList.currentCycle1User?.userName ?? 'User 1';
   const cycle2User = usersList.currentCycle2User?.userName ?? 'User 2';
 
-  const [speedValue, setspeedValue] = useState([0, 45]);
+  const [speed1Value, setspeed1Value] = useState([0, 45]);
+  const [speed2Value, setspeed2Value] = useState([0, 45]);
   const [heartRate1Value, setheartRate1Value] = useState([50, 160]);
-  const [heartRateValue, setheartRateValue] = useState([50, 160]);
+  const [heartRate2Value, setheartRate2Value] = useState([50, 160]);
   const [warningMessage, setWarningMessage] = useState([]);
 
   useEffect(() => {
@@ -63,17 +65,34 @@ const Notifications = () => {
 
   const playWarningSound = (type) => {
     const audioHeartRate = new Audio(warningSound);
+    const audioSpeed = new Audio(warningSoundSpeed);
 
-    if (type === "heart") {
+    if (type === 'heart') {
       audioHeartRate.play();
     }
-  }
+    if (type === 'speed') {
+      audioSpeed.play();
+    }
+  };
 
   useEffect(() => {
-    if (warningMessage.includes('User 1 High Heart Rate') || (warningMessage.includes('User 1 Low Heart Rate')) {
+    if (
+      warningMessage.includes('User 1 High Heart Rate') ||
+      warningMessage.includes('User 1 Low Heart Rate') ||
+      warningMessage.includes('User 2 High Heart Rate') ||
+      warningMessage.includes('User 2 Low Heart Rate')
+    ) {
       playWarningSound('heart');
     }
-  }, [warningMessage])
+    if (
+      warningMessage.includes('User 1 High Speed') ||
+      warningMessage.includes('User 1 Low Speed') ||
+      warningMessage.includes('User 2 High Speed') ||
+      warningMessage.includes('User 2 Low Speed')
+    ) {
+      playWarningSound('speed');
+    }
+  }, [warningMessage]);
 
   useEffect(() => {
     dispatch(getAllLimits());
@@ -82,28 +101,83 @@ const Notifications = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(getAllCards());
-      console.log("userOneHeart", userOneHeart);
-      
-      userOneHeart.map(item => {
-        if(item.bpm > heartRate1Value[1]) {
-          console.log("current", item.bpm , heartRate1Value[1]);
-          setWarningMessage(prevMessages => {
+      console.log('userOneHeart', userOneHeart);
+
+      userOneHeart.map((item) => {
+        if (item.bpm > heartRate1Value[1]) {
+          console.log('current', item.bpm, heartRate1Value[1]);
+          setWarningMessage((prevMessages) => {
             const updatedMessages = new Set([...prevMessages, 'User 1 High Heart Rate']);
-          
+
             return Array.from(updatedMessages);
           });
         } else if (item.bpm < heartRate1Value[0]) {
-          setWarningMessage(prevMessages => {
+          setWarningMessage((prevMessages) => {
             const updatedMessages = new Set([...prevMessages, 'User 1 Low Heart Rate']);
-          
+
             return Array.from(updatedMessages);
           });
         }
-      })
-  
+      });
+
+      console.log('userTwoHeart', userTwoHeart);
+
+      userTwoHeart.map((item) => {
+        if (item.bpm > heartRate2Value[1]) {
+          console.log('current', item.bpm, heartRate2Value[1]);
+          setWarningMessage((prevMessages) => {
+            const updatedMessages = new Set([...prevMessages, 'User 2 High Heart Rate']);
+
+            return Array.from(updatedMessages);
+          });
+        } else if (item.bpm < heartRate2Value[0]) {
+          setWarningMessage((prevMessages) => {
+            const updatedMessages = new Set([...prevMessages, 'User 2 Low Heart Rate']);
+
+            return Array.from(updatedMessages);
+          });
+        }
+      });
+
+      console.log('userOneSpeed', userOneSpeed);
+
+      userOneSpeed.map((item) => {
+        if (item.speed > speed1Value[1]) {
+          console.log('current', item.speed, speed1Value[1]);
+          setWarningMessage((prevMessages) => {
+            const updatedMessages = new Set([...prevMessages, 'User 1 High Speed']);
+
+            return Array.from(updatedMessages);
+          });
+        } else if (item.speed < speed1Value[0]) {
+          setWarningMessage((prevMessages) => {
+            const updatedMessages = new Set([...prevMessages, 'User 1 Low Speed']);
+
+            return Array.from(updatedMessages);
+          });
+        }
+      });
+
+      console.log('userTwoSpeed', userTwoSpeed);
+
+      userTwoSpeed.map((item) => {
+        if (item.speed > speed2Value[1]) {
+          console.log('current', item.speed, speed2Value[1]);
+          setWarningMessage((prevMessages) => {
+            const updatedMessages = new Set([...prevMessages, 'User 2 High Speed']);
+
+            return Array.from(updatedMessages);
+          });
+        } else if (item.speed < speed2Value[0]) {
+          setWarningMessage((prevMessages) => {
+            const updatedMessages = new Set([...prevMessages, 'User 2 Low Speed']);
+
+            return Array.from(updatedMessages);
+          });
+        }
+      });
     }, 8000);
 
-    
     return () => clearInterval(interval);
   }, [dispatch, userOneHeart]);
 
@@ -122,6 +196,18 @@ const Notifications = () => {
     setheartRate1Value(newValue);
   };
 
+  const heartRate2HandleChange = (event, newValue) => {
+    setheartRate2Value(newValue);
+  };
+
+  const speed1HandleChange = (event, newValue) => {
+    setspeed1Value(newValue);
+  };
+
+  const speed2HandleChange = (event, newValue) => {
+    setspeed2Value(newValue);
+  };
+
   const heartRateHandleChange = (event, newValue) => {
     setheartRateValue(newValue);
     const hum = {
@@ -133,7 +219,7 @@ const Notifications = () => {
 
   const handleCloseWarning = () => {
     setWarningMessage([]);
-  }
+  };
 
   const waterHandleChange = (event, newValue) => {
     setWaterValue(newValue);
@@ -148,7 +234,7 @@ const Notifications = () => {
   // console.log(waterValue,"water")
 
   if (data.loading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (
@@ -167,8 +253,8 @@ const Notifications = () => {
                       <h3 className={classes.cardTitle}>
                         Recommended Values
                         <Slider
-                          value={speedValue}
-                          onChange={speedHandleChange}
+                          value={speed1Value}
+                          onChange={speed1HandleChange}
                           valueLabelDisplay="auto"
                           aria-labelledby="range-slider"
                         />
@@ -222,8 +308,8 @@ const Notifications = () => {
                       <h3 className={classes.cardTitle}>
                         Recommended Values
                         <Slider
-                          value={speedValue}
-                          onChange={speedHandleChange}
+                          value={speed2Value}
+                          onChange={speed2HandleChange}
                           valueLabelDisplay="auto"
                           aria-labelledby="range-slider"
                         />
@@ -249,8 +335,8 @@ const Notifications = () => {
                       <h3 className={classes.cardTitle}>
                         Recommended Values
                         <Slider
-                          value={heartRateValue}
-                          onChange={heartRateHandleChange}
+                          value={heartRate2Value}
+                          onChange={heartRate2HandleChange}
                           valueLabelDisplay="auto"
                           aria-labelledby="range-slider"
                         />
@@ -269,14 +355,14 @@ const Notifications = () => {
             </div>
           )
         : null}
-      {warningMessage.length > 0 &&
+      {warningMessage.length > 0 && (
         <div>
-        {warningMessage.map(item => 
-          <Button>{item}</Button>
-        )}
-        <Button onClick={handleCloseWarning}>Close</Button>
-      </div>
-      }
+          {warningMessage.map((item) => (
+            <Button>{item}</Button>
+          ))}
+          <Button onClick={handleCloseWarning}>Close</Button>
+        </div>
+      )}
     </div>
   );
 };
