@@ -168,7 +168,7 @@ const Dashboard = ()=> {
                 </CardBody>
                 <CardFooter chart>
                   <div className={classes.stats}>
-                    <AccessTime /> updated 30 seconds ago
+                    <AccessTime /> updated 5 seconds ago
                   </div>
                 </CardFooter>
               </Card>
@@ -198,7 +198,7 @@ const Dashboard = ()=> {
                 </CardBody>
                 <CardFooter chart>
                   <div className={classes.stats}>
-                    <AccessTime /> updated 30 seconds ago
+                    <AccessTime /> updated 10 seconds ago
                   </div>
                 </CardFooter>
               </Card>

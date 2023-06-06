@@ -28,8 +28,8 @@ import SpeedIcon from '@material-ui/icons/Speed';
 import { getAllCards } from '../Graphs/action';
 
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
-import warningSound from './Pacman-death-sound.mp3'; // Import your sound file
-import warningSoundSpeed from './new-mp3-message-ringtones.mp3';
+import warningSoundSpeed from './Pacman-death-sound.mp3'; // Import your sound file
+import warningSound from './new-mp3-message-ringtones.mp3';
 
 const useStyles = makeStyles(styles);
 
@@ -66,7 +66,7 @@ const Notifications = () => {
   const playWarningSound = (type) => {
     const audioHeartRate = new Audio(warningSound);
     const audioSpeed = new Audio(warningSoundSpeed);
-
+    
     if (type === 'heart') {
       audioHeartRate.play();
     }
@@ -335,6 +335,8 @@ const Notifications = () => {
                       <h3 className={classes.cardTitle}>
                         Recommended Values
                         <Slider
+                           min={40}
+                           max={240}
                           value={heartRate2Value}
                           onChange={heartRate2HandleChange}
                           valueLabelDisplay="auto"

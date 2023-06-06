@@ -121,19 +121,25 @@ const Dashboard = () => {
                       />
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Heart Rate Chart {cycle1User}</h4>
+                      <h4 className={classes.cardTitle}>Speed Chart {cycle2User}</h4>
                       {
                         <p className={classes.cardCategory}>
                           <span className={classes.successText}>
-                            <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                            <ArrowUpward className={classes.upArrowCardCategory} />{' '}
+                            {((userTwoSpeed[userTwoSpeed.length - 1]?.speed - userTwoSpeed[0]?.speed) /
+                              userTwoSpeed[0]?.speed) *
+                              100}{' '}
+                            %
                           </span>{' '}
-                          increase in last 3 hours.
+                          increase in last{' '}
+                          {userTwoSpeed[userTwoSpeed.length - 1]?.time.seconds - userTwoSpeed[0]?.time.seconds} seconds.
                         </p>
                       }
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
-                        <AccessTime /> updated at
+                        <AccessTime /> updated at{' '}
+                        {new Date(userTwoSpeed[userTwoSpeed.length - 1]?.time.seconds * 1000).toUTCString()}
                       </div>
                     </CardFooter>
                   </Card>
@@ -157,15 +163,21 @@ const Dashboard = () => {
                       {
                         <p className={classes.cardCategory}>
                           <span className={classes.successText}>
-                            <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                            <ArrowUpward className={classes.upArrowCardCategory} />{' '}
+                            {((userOneOxygen[userOneOxygen.length - 1]?.spo2 - userOneOxygen[0]?.spo2) /
+                              userOneOxygen[0]?.spo2) *
+                              100}{' '}
+                            %
                           </span>{' '}
-                          increase in last 3 hours.
+                          increase in last{' '}
+                          {userOneOxygen[userOneOxygen.length - 1]?.time.seconds - userOneOxygen[0]?.time.seconds} seconds.
                         </p>
                       }
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
-                        <AccessTime /> updated 30 seconds ago
+                        <AccessTime /> updated at{' '}
+                        {new Date(userOneOxygen[userOneOxygen.length - 1]?.time.seconds * 1000).toUTCString()}
                       </div>
                     </CardFooter>
                   </Card>
@@ -186,16 +198,24 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardBody>
                       <h4 className={classes.cardTitle}>Speed Chart {cycle2User}</h4>
-                      {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
+                      {
+                        <p className={classes.cardCategory}>
+                          <span className={classes.successText}>
+                            <ArrowUpward className={classes.upArrowCardCategory} />{' '}
+                            {((userTwoSpeed[userTwoSpeed.length - 1]?.speed - userTwoSpeed[0]?.speed) /
+                              userTwoSpeed[0]?.speed) *
+                              100}{' '}
+                            %
+                          </span>{' '}
+                          increase in last{' '}
+                          {userTwoSpeed[userTwoSpeed.length - 1]?.time.seconds - userTwoSpeed[0]?.time.seconds} seconds.
+                        </p>
+                      }
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
-                        <AccessTime /> updated 30 seconds ago
+                        <AccessTime /> updated at{' '}
+                        {new Date(userTwoSpeed[userTwoSpeed.length - 1]?.time.seconds * 1000).toUTCString()}
                       </div>
                     </CardFooter>
                   </Card>
@@ -217,16 +237,24 @@ const Dashboard = () => {
                     </CardHeader>
                     <CardBody>
                       <h4 className={classes.cardTitle}>Heart Rate {cycle2User}</h4>
-                      {/* <p className={classes.cardCategory}>
-                    <span className={classes.successText}>
-                      <ArrowUpward className={classes.upArrowCardCategory} /> 50%
-                    </span>{" "}
-                    increase in last 3 hours.
-                  </p> */}
+                      {
+                        <p className={classes.cardCategory}>
+                          <span className={classes.successText}>
+                            <ArrowUpward className={classes.upArrowCardCategory} />{' '}
+                            {((userTwoHeart[userTwoHeart.length - 1]?.bpm - userTwoHeart[0]?.bpm) /
+                              userTwoHeart[0]?.bpm) *
+                              100}{' '}
+                            %
+                          </span>{' '}
+                          increase in last{' '}
+                          {userTwoHeart[userTwoHeart.length - 1]?.time.seconds - userTwoHeart[0]?.time.seconds} seconds.
+                        </p>
+                      }
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
-                        <AccessTime /> updated 30 seconds ago
+                        <AccessTime /> updated at{' '}
+                        {new Date(userTwoHeart[userTwoHeart.length - 1]?.time.seconds * 1000).toUTCString()}
                       </div>
                     </CardFooter>
                   </Card>
@@ -250,15 +278,21 @@ const Dashboard = () => {
                       {
                         <p className={classes.cardCategory}>
                           <span className={classes.successText}>
-                            <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                            <ArrowUpward className={classes.upArrowCardCategory} />{' '}
+                            {((userTwoOxygen[userTwoOxygen.length - 1]?.spo2 - userTwoOxygen[0]?.spo2) /
+                              userTwoOxygen[0]?.spo2) *
+                              100}{' '}
+                            %
                           </span>{' '}
-                          increase in last 3 hours.
+                          increase in last{' '}
+                          {userTwoOxygen[userTwoOxygen.length - 1]?.time.seconds - userTwoOxygen[0]?.time.seconds} seconds.
                         </p>
                       }
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
-                        <AccessTime /> updated 30 seconds ago
+                        <AccessTime /> updated at{' '}
+                        {new Date(userTwoOxygen[userTwoOxygen.length - 1]?.time.seconds * 1000).toUTCString()}
                       </div>
                     </CardFooter>
                   </Card>

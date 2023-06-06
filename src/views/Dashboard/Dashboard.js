@@ -70,7 +70,7 @@ const Dashboard = () => {
                   <CardIcon color="info">
                   <SpeedIcon/>
                   </CardIcon>
-                  <p className={classes.cardCategory}>Bicycle Speed User 1</p>
+                  <p className={classes.cardCategory}>Bicycle Speed {cycle1User}</p>
                   <h3 className={classes.cardTitle}>
                     {userOneSpeed[0].speed}<small>km/h</small>
                   </h3>
@@ -89,13 +89,13 @@ const Dashboard = () => {
           <CardIcon color="success">
             <LocationOnIcon />
           </CardIcon>
-          <p className={classes.cardCategory}>Distance User 1</p>
+          <p className={classes.cardCategory}>Distance {cycle1User}</p>
           <h3 className={classes.cardTitle}>{userOneDistance[0].distance} m</h3>
           </CardHeader>
           <CardFooter stats>
           <div className={classes.stats}>
             <AccessTime />
-            updated every 10 seconds 
+            updated every 5 seconds 
             </div>
           </CardFooter>
           </Card>
@@ -107,7 +107,7 @@ const Dashboard = () => {
                   <CardIcon color="info">
                   <SpeedIcon/>
                   </CardIcon>
-                  <p className={classes.cardCategory}>Bicycle Speed User 2</p>
+                  <p className={classes.cardCategory}>Bicycle Speed {cycle2User}</p>
                   <h3 className={classes.cardTitle}>
                     {userTwoSpeed[0].speed}<small>km/h</small>
                   </h3>
@@ -127,13 +127,13 @@ const Dashboard = () => {
           <CardIcon color="success">
             <LocationOnIcon />
           </CardIcon>
-          <p className={classes.cardCategory}>Distance User 2</p>
+          <p className={classes.cardCategory}>Distance {cycle2User}</p>
           <h3 className={classes.cardTitle}>{userTwoDistance[0].distance} m</h3>
           </CardHeader>
           <CardFooter stats>
           <div className={classes.stats}>
             <AccessTime />
-            updated every 10 seconds
+            updated every 5 seconds
             </div>
           </CardFooter>
           </Card>
@@ -144,7 +144,7 @@ const Dashboard = () => {
           <CardIcon color="warning">
             <EcoIcon />
           </CardIcon>
-          <p className={classes.cardCategory}>Oxygen Saturation User 1</p>
+          <p className={classes.cardCategory}>Oxygen Saturation {cycle1User}</p>
           <h3 className={classes.cardTitle}>{userOneOxygen[0].spo2}%</h3>
         </CardHeader>
         <CardFooter stats>
@@ -161,7 +161,7 @@ const Dashboard = () => {
                   <CardIcon color="rose">
                     <Favorite/>
                   </CardIcon>
-                  <p className={classes.cardCategory}>Heart Rate User 1</p>
+                  <p className={classes.cardCategory}>Heart Rate {cycle1User}</p>
                   <h3 className={classes.cardTitle}>{userOneHeart[0].bpm}bpm</h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -178,7 +178,7 @@ const Dashboard = () => {
           <CardIcon color="warning">
             <EcoIcon />
           </CardIcon>
-          <p className={classes.cardCategory}>Oxygen Saturation User 2</p>
+          <p className={classes.cardCategory}>Oxygen Saturation {cycle2User}</p>
           <h3 className={classes.cardTitle}>{userTwoOxygen[0].spo2}%</h3>
         </CardHeader>
         <CardFooter stats>
@@ -195,7 +195,7 @@ const Dashboard = () => {
                   <CardIcon color="rose">
                     <Favorite/>
                   </CardIcon>
-                  <p className={classes.cardCategory}>Heart Rate User 2</p>
+                  <p className={classes.cardCategory}>Heart Rate {cycle2User}</p>
                   <h3 className={classes.cardTitle}>{userTwoHeart[0].bpm}bpm</h3>
                 </CardHeader>
                 <CardFooter stats>
