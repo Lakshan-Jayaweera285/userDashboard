@@ -28,7 +28,7 @@ import SpeedIcon from '@material-ui/icons/Speed';
 import { getAllCards } from '../Graphs/action';
 
 import styles from 'assets/jss/material-dashboard-react/views/dashboardStyle.js';
-import warningSoundSpeed from './Pacman-death-sound.mp3'; // Import your sound file
+import warningSoundSpeed from './Notification.mp3'; // Import your sound file
 import warningSound from './new-mp3-message-ringtones.mp3';
 
 const useStyles = makeStyles(styles);

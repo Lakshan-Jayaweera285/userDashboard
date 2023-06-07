@@ -121,25 +121,25 @@ const Dashboard = () => {
                       />
                     </CardHeader>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Speed Chart {cycle2User}</h4>
+                      <h4 className={classes.cardTitle}>Heart Rate Chart {cycle1User}</h4>
                       {
                         <p className={classes.cardCategory}>
                           <span className={classes.successText}>
                             <ArrowUpward className={classes.upArrowCardCategory} />{' '}
-                            {((userTwoSpeed[userTwoSpeed.length - 1]?.speed - userTwoSpeed[0]?.speed) /
-                              userTwoSpeed[0]?.speed) *
+                            {((userOneHeart[userOneHeart.length - 1]?.bpm - userOneHeart[0]?.bpm) /
+                              userOneHeart[0]?.bpm) *
                               100}{' '}
                             %
                           </span>{' '}
                           increase in last{' '}
-                          {userTwoSpeed[userTwoSpeed.length - 1]?.time.seconds - userTwoSpeed[0]?.time.seconds} seconds.
+                          {userOneHeart[userOneHeart.length - 1]?.time.seconds - userOneHeart[0]?.time.seconds} seconds.
                         </p>
                       }
                     </CardBody>
                     <CardFooter chart>
                       <div className={classes.stats}>
                         <AccessTime /> updated at{' '}
-                        {new Date(userTwoSpeed[userTwoSpeed.length - 1]?.time.seconds * 1000).toUTCString()}
+                        {new Date(userOneHeart[userOneHeart.length - 1]?.time.seconds * 1000).toUTCString()}
                       </div>
                     </CardFooter>
                   </Card>

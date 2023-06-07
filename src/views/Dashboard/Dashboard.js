@@ -72,7 +72,7 @@ const Dashboard = () => {
                   </CardIcon>
                   <p className={classes.cardCategory}>Bicycle Speed {cycle1User}</p>
                   <h3 className={classes.cardTitle}>
-                    {userOneSpeed[0].speed}<small>km/h</small>
+                    {userOneSpeed[8].speed}<small>km/h</small>
                   </h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -90,7 +90,7 @@ const Dashboard = () => {
             <LocationOnIcon />
           </CardIcon>
           <p className={classes.cardCategory}>Distance {cycle1User}</p>
-          <h3 className={classes.cardTitle}>{userOneDistance[0].distance} m</h3>
+          <h3 className={classes.cardTitle}>{userOneDistance[8].distance} m</h3>
           </CardHeader>
           <CardFooter stats>
           <div className={classes.stats}>
@@ -109,7 +109,7 @@ const Dashboard = () => {
                   </CardIcon>
                   <p className={classes.cardCategory}>Bicycle Speed {cycle2User}</p>
                   <h3 className={classes.cardTitle}>
-                    {userTwoSpeed[0].speed}<small>km/h</small>
+                    {userTwoSpeed[8].speed}<small>km/h</small>
                   </h3>
                 </CardHeader>
                 <CardFooter stats>
@@ -128,7 +128,7 @@ const Dashboard = () => {
             <LocationOnIcon />
           </CardIcon>
           <p className={classes.cardCategory}>Distance {cycle2User}</p>
-          <h3 className={classes.cardTitle}>{userTwoDistance[0].distance} m</h3>
+          <h3 className={classes.cardTitle}>{userTwoDistance[8].distance} m</h3>
           </CardHeader>
           <CardFooter stats>
           <div className={classes.stats}>
@@ -145,7 +145,7 @@ const Dashboard = () => {
             <EcoIcon />
           </CardIcon>
           <p className={classes.cardCategory}>Oxygen Saturation {cycle1User}</p>
-          <h3 className={classes.cardTitle}>{userOneOxygen[0].spo2}%</h3>
+          <h3 className={classes.cardTitle}>{userOneOxygen[8].spo2}%</h3>
         </CardHeader>
         <CardFooter stats>
           <div className={classes.stats}>
@@ -162,7 +162,7 @@ const Dashboard = () => {
                     <Favorite/>
                   </CardIcon>
                   <p className={classes.cardCategory}>Heart Rate {cycle1User}</p>
-                  <h3 className={classes.cardTitle}>{userOneHeart[0].bpm}bpm</h3>
+                  <h3 className={classes.cardTitle}>{userOneHeart[8].bpm}bpm</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>
@@ -179,7 +179,7 @@ const Dashboard = () => {
             <EcoIcon />
           </CardIcon>
           <p className={classes.cardCategory}>Oxygen Saturation {cycle2User}</p>
-          <h3 className={classes.cardTitle}>{userTwoOxygen[0].spo2}%</h3>
+          <h3 className={classes.cardTitle}>{userTwoOxygen[8].spo2}%</h3>
         </CardHeader>
         <CardFooter stats>
           <div className={classes.stats}>
@@ -196,7 +196,7 @@ const Dashboard = () => {
                     <Favorite/>
                   </CardIcon>
                   <p className={classes.cardCategory}>Heart Rate {cycle2User}</p>
-                  <h3 className={classes.cardTitle}>{userTwoHeart[0].bpm}bpm</h3>
+                  <h3 className={classes.cardTitle}>{userTwoHeart[8].bpm}bpm</h3>
                 </CardHeader>
                 <CardFooter stats>
                   <div className={classes.stats}>

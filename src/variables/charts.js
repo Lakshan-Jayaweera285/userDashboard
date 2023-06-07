@@ -24,7 +24,7 @@ const speedChart = {
       tension: 0,
     }),
     low: 0,
-    high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+    high: 60, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,
@@ -78,7 +78,7 @@ const heartRateChart = {
       tension: 0,
     }),
     low: 50,
-    high: 160, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+    high: 250, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,
@@ -128,7 +128,7 @@ const oxygenRateChart = {
       tension: 0,
     }),
     low: 0,
-    high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+    high: 110, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
     chartPadding: {
       top: 0,
       right: 0,

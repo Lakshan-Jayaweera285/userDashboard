@@ -53,7 +53,7 @@ export default function UserProfile() {
   const [lastName, setLastName] = useState('');
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
-  const [postal, setPostal] = useState('');
+  
 
   useEffect(() => {
     dispatch(getUser());
@@ -70,7 +70,6 @@ export default function UserProfile() {
       email: email,
       firstName: firstName,
       lastName: lastName,
-      postalCode: postal,
       userName: userName,
     };
     if (!(company === '')) {
@@ -81,7 +80,6 @@ export default function UserProfile() {
     setUserName('');
     setCity('');
     setEmail('');
-    setPostal('');
     setFirstName('');
     setLastName('');
     dispatch(getUser());
@@ -209,20 +207,7 @@ export default function UserProfile() {
                             onChange={(e) => setCountry(e.target.value)}
                           />
                         </GridItem>
-                        <GridItem xs={12} sm={12} md={4}>
-                          <TextField
-                            id="outlined-basic"
-                            color="secondary"
-                            placeholder="Postal Code"
-                            variant="outlined"
-                            fullWidth
-                            multiline
-                            type="text"
-                            required
-                            value={postal}
-                            onChange={(e) => setPostal(e.target.value)}
-                          />
-                        </GridItem>
+                        
                       </GridContainer>
                     </CardBody>
                     <CardFooter>
@@ -247,7 +232,6 @@ export default function UserProfile() {
                       <p className={classes.description}>User Name : {userData.userName}</p>
                       <p className={classes.description}>Email : {userData.email}</p>
                       <p className={classes.description}>City : {userData.city}</p>
-                      <p className={classes.description}>Postal Code : {userData.postalCode}</p>
                       <p className={classes.description}>Country : {userData.country}</p>
                     </CardBody>
                   </Card>
